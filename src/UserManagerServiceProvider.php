@@ -3,7 +3,7 @@
  * User Manager Service Provider
  */
 
-namespace RoelvanLierop\Usermanager;
+namespace Roelvanlierop\Usermanager;
 
 use Illuminate\Support\ServiceProvider;
 
