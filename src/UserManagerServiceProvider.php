@@ -37,6 +37,7 @@ class UserManagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        /*
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'usermanager');
         $this->loadRoutesFrom( __DIR__ . '/../routes/web.php');
@@ -53,5 +54,6 @@ class UserManagerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../resources/views/account.blade.php' => resource_path('views/vendor/usermanager/account.blade.php')
         ], 'views');
+        */
     }
 }
