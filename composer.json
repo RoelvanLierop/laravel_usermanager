@@ -1,12 +1,12 @@
 {
-    "name": "RoelvanLierop/laravel_usermanager",
+    "name": "roelvanlierop/usermanager",
     "description": "Laravel extended user manager",
     "type": "package",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "RoelvanLierop\\Usermanager\\": "src/",
-            "RoelvanLierop\\Usermanager\\Database\\Seeders\\": "database/seeders/"
+            "Roelvanlierop\\Usermanager\\": "src/",
+            "Roelvanlierop\\Usermanager\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "authors": [
@@ -17,13 +17,12 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "prodizmemoria/lister": "dev-master",
         "spatie/laravel-permission": "^6.4"
     },
     "extra": {
         "laravel": {
             "providers": [
-                "RoelvanLierop\\Usermanager\\UserManagerServiceProvider"
+                "Roelvanlierop\\Usermanager\\UserManagerServiceProvider"
             ]
         }
     }
