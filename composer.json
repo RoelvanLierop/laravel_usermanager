@@ -15,7 +15,7 @@
             "email": "roel.van.lierop@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "spatie/laravel-permission": "^6.4"
     },
