@@ -1,13 +1,13 @@
 <?php
 /**
- * Prodiz Memoria User Manager Configuration File
+ * User Manager Configuration File
  *
  * This configuration file lays out all the configuration we need to get the User Manager up and running
  *
- * @used-by Prodizmemoria\Usermanager\UserManagerServiceProvider::boot()
- * @author Roel van Lierop | Prodiz Memoria Lead Developer - <roel@aandachttrekkers.nl>
+ * @used-by Roelvanlierop\Usermanager\UserManagerServiceProvider::boot()
+ * @author Roel van Lierop - <roel.van.lierop@gmail.com>
  * @category Laravel Configuration File
- * @link ../vendor/prodizmemoria/usermanager/src/config/usermanager.php
+ * @link ../vendor/roelvanlierop/usermanager/src/config/usermanager.php
  */
 
 return [

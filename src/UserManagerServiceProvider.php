@@ -13,7 +13,7 @@ use Illuminate\Support\ServiceProvider;
  * This service provider helps Laravel enable the User Manager module and publish / load the needed hooks into Laravel.
  *
  * @package RoelvanLierop\Usermanager
- * @author Roel van Lierop | Prodiz Memoria Lead Developer - <roel.van.lierop@gmail.com>
+ * @author Roel van Lierop - <roel.van.lierop@gmail.com>
  * @category Laravel Service Provider
  */
 class UserManagerServiceProvider extends ServiceProvider
@@ -41,15 +41,15 @@ class UserManagerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/usermanager.php' => config_path('usermanager.php'),
         ], 'config');
-        /*
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'usermanager');
 
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'usermanager');
+        /*
         $this->publishes([
             __DIR__.'/../resources/js' => public_path('js'),
         ], 'javascript');
 
         $this->publishes([
-            __DIR__ . '/../resources/views/account.blade.php' => resource_path('views/vendor/usermanager/account.blade.php')
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/usermanager')
         ], 'views');
         */
     }
