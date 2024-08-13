@@ -17,7 +17,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "spatie/laravel-permission": "^6.4"
+        "spatie/laravel-permission": "^6.4",
+        "romanzipp/laravel-twitch": "dev-master"
     },
     "extra": {
         "laravel": {

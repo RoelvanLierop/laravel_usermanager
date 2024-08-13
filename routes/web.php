@@ -21,6 +21,9 @@ Route::group([
     Route::get( '/relogin/start/{id}', [UserSwitcherController::class, 'start'] )->name('relogin_start');
     Route::get( '/relogin/stop', [UserSwitcherController::class, 'stop'] )->name('relogin_stop');
 
+    /* Team Profile */
+    Route::get( '/profile/team', [TeamManagerController::class, 'profile'] )->name('team_profile');
+
     /* Team manager */
     Route::get( '/teams/delete/{id?}', [TeamManagerController::class, 'delete'] )->name('team_delete');
     Route::get( '/teams/create', [TeamManagerController::class, 'create'] )->name('team_create');

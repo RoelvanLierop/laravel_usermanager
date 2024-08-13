@@ -41,6 +41,15 @@ class TeamManagerController extends Controller
         return view('usermanager::teams.read', $data);
     }
 
+    public function profile()
+    {
+        $data['teams'] = Teams::all();
+        if( session('team_id') ) {
+            $data['teams'] = new Collection( [ $data['teams']->find( session('team_id') )->first() ] );
+        }
+        return view('usermanager::teams.profile', $data);
+    }
+
     public function create( Request $request )
     {
         $data = [];

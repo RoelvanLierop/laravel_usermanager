@@ -1,4 +1,4 @@
-<table class="mt-6 w-full table-auto">
+<table class="mt-6 w-full table-auto text-gray-900 dark:text-gray-100">
     <thead>
         <tr>
             <th class="p-0 py-2 m-0 text-left">Name</th>
