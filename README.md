@@ -3,12 +3,12 @@ User Manager based on Laravel 11, Breeze, and Spatie Permissions
 
 ## Installation
 * Composer install this package first
-* Run php artisan migrate to create the needed tables
-* Run php artisan db:seed, this will create a super admin user!
-* Run php artisan vendor:publish --provider="Roelvanlierop\Usermanager\UserManagerServiceProvider"
-* Run php artisan cache:clear to clear cache
-* Run php artisan route:clear to clear route cache
-* Run php artisan view:clear to clear view cache
+* Run __php artisan migrate__ to create the needed tables
+* Run __php artisan db:seed__, this will create a super admin user!
+* Run __php artisan vendor:publish --provider="Roelvanlierop\Usermanager\UserManagerServiceProvider"__, this will load various components into Laravel.
+* Run __php artisan cache:clear__ to clear cache
+* Run __php artisan route:clear__ to clear route cache
+* Run __php artisan view:clear__ to clear view cache
 
 ## Usage
 
