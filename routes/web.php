@@ -15,7 +15,7 @@ use Roelvanlierop\Usermanager\Http\Controllers\PermissionManagerController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
-    'middleware' => ['web', 'auth']
+    'middleware' => ['web', 'auth', 'teams']
 ], function () {
     /* User switcher */
     Route::get( '/relogin/start/{id}', [UserSwitcherController::class, 'start'] )->name('relogin_start');
@@ -28,6 +28,7 @@ Route::group([
     Route::get( '/teams/delete/{id?}', [TeamManagerController::class, 'delete'] )->name('team_delete');
     Route::get( '/teams/create', [TeamManagerController::class, 'create'] )->name('team_create');
     Route::get( '/teams/{id?}', [TeamManagerController::class, 'read'] )->name('team_read');
+    Route::get( '/teams/switch/{id?}', [TeamManagerController::class, 'switch'] )->name('team_switch');
     Route::post( '/teams/create', [TeamManagerController::class, 'update'] )->name('team_create_post');
     Route::patch( '/teams', [TeamManagerController::class, 'update'] )->name('team_update');
 
@@ -43,6 +44,7 @@ Route::group([
     Route::get( '/roles/create', [RoleManagerController::class, 'create'] )->name('role_create');
     Route::get( '/roles/{id?}', [RoleManagerController::class, 'read'] )->name('role_read');
     Route::post( '/roles/create', [RoleManagerController::class, 'update'] )->name('role_create_post');
+    Route::get( '/roles/assign/{id?}', [RoleManagerController::class, 'assignToTeam'] )->name('team_assign');
     Route::patch( '/roles', [RoleManagerController::class, 'update'] )->name('role_update');
 
     /* Permission manager */

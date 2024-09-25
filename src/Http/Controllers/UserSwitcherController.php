@@ -32,14 +32,19 @@ class UserSwitcherController extends Controller
      * @param $id String New ID to login
      * @return RedirectResponse Redirect response from Laravel
      */
-    public function start( $id )
+    public function start( $id ): RedirectResponse
     {
         $new_user = User::find( $id );
-        if( !Session::has( 'relogin_user' ) ) {
+
+        if( !Session::has( 'relogin_user' ) )
+        {
             Session::put('relogin_user', Auth::id());
         }
+
         Auth::login( $new_user );
-        if( config('usermanager.routes.relogin_return_uri') ) {
+
+        if( config('usermanager.routes.relogin_return_uri') )
+        {
             return Redirect::intended(App::currentLocale() . config('usermanager.routes.relogin_return_uri') );
         } else {
             return Redirect::back();
@@ -53,12 +58,14 @@ class UserSwitcherController extends Controller
      *
      * @return RedirectResponse Redirect response from Laravel
      */
-    public function stop()
+    public function stop(): RedirectResponse
     {
         $id = Session::get( 'relogin_user' );
         $orig_user = User::find( $id );
+
         Auth::login( $orig_user );
         Session::forget( 'relogin_user' );
+
         return Redirect::back();
     }
 }

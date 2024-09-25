@@ -36,5 +36,15 @@
                 </div>
             </div>
         </div>
+        @if ( $roleCount === 1 && intval($requestid) > 0 )
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="mt-6 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <h3 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Assign Role to Team</h3>
+                            @include( 'usermanager::roles.partials.assignteams', [ 'teams' => $teams ] )
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 </x-app-layout>
