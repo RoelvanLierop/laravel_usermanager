@@ -15,6 +15,12 @@ use Roelvanlierop\Usermanager\Http\Controllers\PermissionManagerController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
+    'middleware' => ['web']
+], function () {
+    Route::get( '/teams/invite/{key?}', [TeamManagerController::class, 'acceptInvite'] )->name('team_acceptinvite');
+});
+
+Route::group([
     'middleware' => ['web', 'auth', 'teams']
 ], function () {
     /* User switcher */
@@ -30,6 +36,7 @@ Route::group([
     Route::get( '/teams/{id?}', [TeamManagerController::class, 'read'] )->name('team_read');
     Route::get( '/teams/switch/{id?}', [TeamManagerController::class, 'switch'] )->name('team_switch');
     Route::post( '/teams/create', [TeamManagerController::class, 'update'] )->name('team_create_post');
+    Route::post( '/teams/invite', [TeamManagerController::class, 'invite'] )->name('team_invite');
     Route::patch( '/teams', [TeamManagerController::class, 'update'] )->name('team_update');
 
     /* User manager */

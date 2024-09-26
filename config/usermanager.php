@@ -13,6 +13,11 @@
 return [
     'routes' => [
         'index' => 'users',
-        'shadowlogin_return_uri' => '/dashboard'
+        'shadowlogin_return_uri' => '/dashboard',
     ],
+    'invite_accept_route' => '/profile',
+    'email_address' => [
+        'mail' => 'roel.van.lierop@gmail.com',
+        'name' => 'User Manager'
+    ]
 ];

@@ -1,5 +1,5 @@
 <p>Invite a new user to this team!</p>
-<form method="post" action="{{ route('team_update') }}" class="mt-6 space-y-6">
+<form method="post" action="{{ route('team_invite') }}" class="mt-6 space-y-6">
     @csrf
     @method('post')
     <x-text-hidden id="id" :value="$tid" name="id" required />
@@ -11,11 +11,10 @@
     </div>
 
     <div>
-        <x-input-label for="email" :value="__('role')" />
-        <x-form-select id="email" name="email" type="text" class="mt-1 block w-full" :options="$roles" required autofocus autocomplete="email" />
+        <x-input-label for="role" :value="__('role')" />
+        <x-form-select id="role" name="role" type="text" class="mt-1 block w-full" :options="$roles" required autofocus autocomplete="role" />
         <x-input-error class="mt-2" :messages="$errors->get('role')" />
     </div>
-
 
     <div class="flex items-center gap-4">
         <x-primary-button>{{ __('Save') }}</x-primary-button>

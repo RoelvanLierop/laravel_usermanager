@@ -6,13 +6,20 @@ namespace Roelvanlierop\Usermanager\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
+use Roelvanlierop\Usermanager\Mail\InviteUser;
 use Roelvanlierop\Usermanager\Models\Teams;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Roelvanlierop\Usermanager\Models\PermissionsUser;
+use Roelvanlierop\Usermanager\Models\teamsInvites;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Team Manager Controller
@@ -51,7 +58,7 @@ class TeamManagerController extends Controller
             }
             $data['teamCount'] = 1;
             $data['users'] = $data['teams'][0]->hasUsers();
-            $data['roles'] = DB::table('roles')->where('team_id', '=', $data['teams'][0]->id )->pluck('name')->all();
+            $data['roles'] = DB::table('roles')->where('team_id', '=', $data['teams'][0]->id )->pluck('name', 'id')->all();
         }
 
         return view('usermanager::teams.read', $data);
@@ -64,7 +71,7 @@ class TeamManagerController extends Controller
      *
      * @return View View for a single (read-only) Team
      */
-    public function profile(): View
+    public function profile( Request $request ): View
     {
         $data['teams'] = Teams::all();
 
@@ -144,5 +151,74 @@ class TeamManagerController extends Controller
         Auth::user()->unsetRelation('roles')->unsetRelation('permissions');
 
         return redirect()->back();
+    }
+
+    /**
+     * Invite user method
+     *
+     * Method which invites a new or existing user to a team, with a specific role
+     *
+     * @param Request $request Request variable
+     */
+    public function invite( Request $request ): RedirectResponse
+    {
+        $invite = new TeamsInvites();
+        $invite->team_id = $request->post('id');
+        $invite->role_id = $request->post('role');
+        $invite->invite_email = $request->post('email');
+        $invite->invite_date = Carbon::today()->format('Y-m-d H:i:s');
+        $invite->invite_key = md5( Carbon::today()->format('Y-m-d H:i:s') );
+
+        $user = User::where('email', '=', $request->post('email'))->first();
+        $pm = new PermissionsUser();
+
+        $team = Teams::find( $invite->team_id );
+
+        if( $user !== null && $pm::isActiveInTeam( $invite->team_id, $invite->user_id ) === false )
+        {
+            $invite->user_id = $user->id;
+        }
+
+        $invite->save();
+        Mail::to( $request->post('email') )->send( new InviteUser( $invite, $team ) );
+
+        return redirect()->back();
+    }
+
+    public function acceptInvite( Request $request )
+    {
+        // $request->key
+        Auth::logout();
+
+        $invite = TeamsInvites::where( 'invite_key', '=', $request->key )->first();
+        if( $invite === null )
+        {
+            // No known invite
+            var_dump('Unknown invitation');
+            die();
+        }
+        elseif( $invite !== null && $invite->user_id !== null )
+        {
+            $role = Role::find( $invite->role_id );
+            $user = User::find( $invite->user_id );
+            Auth::login($user);
+            DB::table('model_has_roles')->insert(
+                [
+                    'role_id' => $role->id,
+                    'model_type' => 'App\Models\User',
+                    'model_id' => $user->id,
+                    'team_id' => $invite->team_id,
+                ]
+            );
+            app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+
+            return redirect()->route( 'dashboard' );
+        }
+        elseif( $invite !== null && $invite->user_id === null )
+        {
+            // Known invite but unknown user, send this one to the register page!
+            Auth::logout();
+            return redirect()->route( 'register' )->with( [ 'invite' => $invite ] );
+        }
     }
 }

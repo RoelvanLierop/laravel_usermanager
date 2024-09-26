@@ -6,6 +6,7 @@
         </tr>
     </thead>
     <tbody>
+        <?php var_dump($roles); ?>
         @foreach($roles as $role)
         <tr class="border-t">
             <td class="p-0 py-2 m-0 text-left">{{ $role }}</td>

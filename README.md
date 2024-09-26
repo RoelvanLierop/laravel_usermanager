@@ -23,11 +23,16 @@ You can use this package as any other user manager, however it makes heavy use o
 
 ## Work In Progress functionality
 
-* Assign role to user.
-* Assign permission to user.
-* Assign permission to role.
-* Assign role to team.
+* Assign workflow
+  * Assign role to user.
+  * Assign permission to user.
+  * Assign permission to role.
+  * Assign role to team.
 * Graphic assets to make sense of the structure.
+* Invitations 
+  * Redirect to home when invite is invalid.
+  * Front-end notifications for invitations.
+  * Broadcasting notifications with Pusher.
 
 ## Routes
 

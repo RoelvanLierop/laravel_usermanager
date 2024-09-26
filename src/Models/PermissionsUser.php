@@ -70,4 +70,16 @@ class PermissionsUser extends User {
 
         return  ['team_name' => ''];
     }
+
+    public static function isActiveInTeam( $team_id, $user_id ): bool {
+
+        $memberships = DB::table('model_has_roles')->select('role_id')
+            ->where( 'model_type', '=', 'App\Models\User' )
+            ->where( 'model_id', '=', $user_id )
+            ->where( 'team_id', '=', $team_id )
+            ->distinct()->get()->toArray();
+
+        return ( count( $memberships ) > 0 ? true : false );
+
+    }
 }

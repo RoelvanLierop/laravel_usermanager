@@ -38,19 +38,24 @@ class UserManagerServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadRoutesFrom( __DIR__ . '/../routes/web.php');
+
+        $this->publishesMigrations([
+            __DIR__.'/../database/migrations' => database_path('migrations'),
+        ]);
+
         $this->publishes([
             __DIR__ . '/../config/usermanager.php' => config_path('usermanager.php'),
         ], 'config');
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'usermanager');
+
+        $this->publishes([
+            __DIR__ . '/../resources/views/mail' => resource_path('views/vendor/usermanager/mail')
+        ], 'mail');
         /*
         $this->publishes([
             __DIR__.'/../resources/js' => public_path('js'),
         ], 'javascript');
-
-        $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/usermanager')
-        ], 'views');
         */
     }
 }
