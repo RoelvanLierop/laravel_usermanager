@@ -37,32 +37,21 @@ You can use this package as any other user manager, however it makes heavy use o
 ## Routes
 
 * Team profile
-
   * /profile/team/{id?}
-
 * Team management
-
   * /teams/{id?} | Team list or edit window
   * /teams/create | Create new team
   * /teams/switch/{id?} | Switch active team
-
 * User management
-
   * /users/{id?} | User list or edit window
   * /users/create | Create new user
-
 * Role management
-
   * /roles/{id?} | User list or edit window
   * /roles/create | Create new role
-
 * Permission management
-
   * /roles/{id?} | Permission list or edit window
   * /roles/create | Create new permission
-
 * Relogin / Login mirroring
-
   * /relogin/start/{id} | Login as a different user with provided ID
   * /relogin/stop | return to current user before relogin action
 
